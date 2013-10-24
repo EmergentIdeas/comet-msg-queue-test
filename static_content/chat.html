@@ -1,0 +1,39 @@
+<html>
+<head>
+	<style type="text/css">
+	@import url('/chat.css')
+	</style>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/comet-msg-queue.jquery.js"></script>
+</head>
+
+<body>
+	<h1>Submit A Message</h1>
+	<div id="message-window">
+		&nbsp;
+	</div>
+	<form method="post" id="chat-form">
+		<input type="hidden" name="chatSession" value="1" />
+		<input type="text" name="myName" />
+		<br/>
+		<textarea name="msg"></textarea>
+		<br/>
+		<button id="send">Send</button>
+	</form>
+	
+	<script type="text/javascript">
+	CometMsgQueue.url = '/comet/messages';
+	CometMsgQueue.parameters.channels.push('/chatSession/1');
+	CometMsgQueue.messageHandle = function(queue, data) {
+		$('#message-window').append(data);
+	}
+	CometMsgQueue.start();
+	
+	$('#send').on('click', function() {
+		$.post('/send-chat', $('#chat-form').serialize());
+		return false;
+	})
+	</script>
+	
+</body>
+</html>

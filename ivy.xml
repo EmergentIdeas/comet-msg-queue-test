@@ -1,0 +1,17 @@
+<ivy-module version="2.0">
+	<info organisation="com.emergentideas" module="base" />
+	<configurations defaultconf="build"	defaultconfmapping="build->*;test->default">
+		<conf name="build" />
+		<conf name="deployment" />
+		<conf name="appdep" />
+		<conf name="test" />
+		<conf name="jetty" />
+	</configurations>
+	<dependencies>
+    	<dependency org="com.emergentideas" name="webhandle" rev="latest.integration" conf="build" />	
+		<dependency org="com.emergentideas" name="oak_login" rev="1.0.0.5" conf="appdep" />
+		<dependency org="com.emergentideas" name="page-editor" rev="1.0.0.0" conf="appdep" />
+		<dependency org="com.emergentideas" name="comet-msg-queue" rev="latest.integration" conf="appdep" />
+		<dependency org="org.eclipse.jetty" name="jetty-runner" rev="latest.integration" conf="jetty->*"/>
+	</dependencies>
+</ivy-module>
